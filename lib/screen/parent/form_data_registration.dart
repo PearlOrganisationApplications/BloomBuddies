@@ -3,6 +3,8 @@ import 'package:bloom/screen/babysitter/widgets/custom_container.dart';
 import 'package:flutter/material.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
+import 'homepage/home_page.dart';
+
 class FromDataRegistrationParent extends StatefulWidget {
   const FromDataRegistrationParent({Key? key}) : super(key: key);
 
@@ -203,8 +205,8 @@ class _FromDataRegistrationParentState extends State<FromDataRegistrationParent>
                         child: MaterialButton(
                           color: Colors.black,
                           onPressed: () {
-                            /*Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FromDataRegistration()));*/
+                            Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => HomePage()));
                           },
                           child: const Text(
                             'Finish',
