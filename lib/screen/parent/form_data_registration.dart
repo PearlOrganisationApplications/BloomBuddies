@@ -1,10 +1,10 @@
 
-import 'package:bloom/screen/babysitter/widgets/custom_container.dart';
-import 'package:bloom/screen/parent/homepage/widgets/time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:from_to_time_picker/from_to_time_picker.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 
+import '../../widgets/custom_appbar.dart';
+import '../widgets/custom_container.dart';
 import 'homepage/home_page.dart';
 
 class FromDataRegistrationParent extends StatefulWidget {
@@ -35,343 +35,324 @@ class _FromDataRegistrationParentState extends State<FromDataRegistrationParent>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Form(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Center(
-                        child: TextField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Address',
-                            hintText: ' Enter a Address',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: TextField(
-                          style: TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Telephone Number',
-                            hintText: ' Enter a Telephone Number  ',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Number of Children',
-                            hintText: 'Enter number of children',
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Center(
-                        child: TextField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Age of Children',
-                            hintText: 'Enter age of Children',
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ParentHomePage(),), (route) => false);
+        return true;
+      },
+      child: Scaffold(
+        appBar: CustomAppBar.appBar(title: 'Personal Information'),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Form(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Column(
-                            children: [
-                              headerContainer(day: 'Day', width: 80.0),
-                              GestureDetector(
-                                onTap: () {
-
-                                  /*showTimePicker(
-                                    context: context,
-                                    initialTime: TimeOfDay(hour: 6,minute: 00),
-
-                                  );*/
-                                  //showTimeDialog(day: 'monday');
-                                },
-                                  child: dayContainer(day: 'Monday')),
-                              GestureDetector(
-                                  onTap: () {
-                                    //showTimeDialog(day: 'tuesday');
-                                  },
-                                  child: dayContainer(day: 'Tuesday')),
-                              GestureDetector(
-                                  onTap: () {
-                                    //showTimeDialog(day: 'wednesday');
-                                  },
-                                  child: dayContainer(day: 'Wednesday')),
-                              GestureDetector(
-                                  onTap: () {
-                                    //showTimeDialog(day: 'thursday');
-                                  },
-                                  child: dayContainer(day: 'Thursday')),
-                              GestureDetector(
-                                  onTap: () {
-                                    //showTimeDialog(day: 'friday');
-                                  },
-                                  child: dayContainer(day: 'Friday')),
-                              GestureDetector(
-                                  onTap: () {
-                                    //showTimeDialog(day: 'saturday');
-                                  },
-                                  child: dayContainer(day: 'Saturday')),
-                              GestureDetector(
-                                  onTap: () {
-                                    //showTimeDialog(day: 'sunday');
-                                  },
-                                  child: dayContainer(day: 'Sunday')),
-                            ],
+                          const SizedBox(height: 20,),
+                          TextField(
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Address',
+                              hintText: ' Enter a Address',
+                            ),
                           ),
-                          Expanded(
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    Column(
-                                      children: [
-                                        headerContainer(day: 'Start', width: 150.0),
+                          const SizedBox(height: 20,),
+                          TextField(
+                            style: TextStyle(color: Colors.white),
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Telephone Number',
+                              hintText: ' Enter a Telephone Number  ',
+                            ),
+                          ),
+                          const SizedBox(height: 20,),
+                          const SizedBox(height: 20,),
 
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'mondayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['mondayStartTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'tuesdayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['tuesdayStartTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'wednesdayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['wednesdayStartTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'thursdayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['thursdayStartTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'fridayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['fridayStartTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'saturdayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['saturdayStartTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'sundayStartTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.green,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['sundayStartTime']!),
-                                          ),
-                                        ),
+                          TextField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Number of Children',
+                              hintText: 'Enter number of children',
+                            ),
+                          ),
+                          const SizedBox(height: 20,),
+                          TextField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Age of Children',
+                              hintText: 'Enter age of Children',
+                            ),
+                          ),
+                          const SizedBox(height: 20,),
+                          ///BabySitting Schedule
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                color: Colors.black
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      children: [
+                                        headerContainer(day: 'Day', width: double.infinity),
+                                        dayContainer(day: 'Monday'),
+                                        Divider(thickness: 1,height: 1),
+                                        dayContainer(day: 'Tuesday'),
+                                        Divider(thickness: 1,height: 1),
+                                        dayContainer(day: 'Wednesday'),
+                                        Divider(thickness: 1,height: 1),
+                                        dayContainer(day: 'Thursday'),
+                                        Divider(thickness: 1,height: 1),
+                                        dayContainer(day: 'Friday'),
+                                        Divider(thickness: 1,height: 1),
+                                        dayContainer(day: 'Saturday'),
+                                        Divider(thickness: 1,height: 1),
+                                        dayContainer(day: 'Sunday'),
                                       ],
                                     ),
-                                    Column(
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
                                       children: [
-                                        headerContainer(day: 'Finish', width: 150.0),
+                                        SizedBox(
+                                          child: Column(
+                                            children: [
+                                              headerContainer(day: 'Start', width: 100.0),
 
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'mondayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['mondayEndTime']!),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'mondayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['mondayStartTime']!),
+                                                ),
+                                              ),
+                                              Divider(thickness: 1,height: 1),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'tuesdayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['tuesdayStartTime']!),
+                                                ),
+                                              ),
+                                              Divider(thickness: 1,height: 1),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'wednesdayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['wednesdayStartTime']!),
+                                                ),
+                                              ),
+                                              Divider(thickness: 1,height: 1),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'thursdayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['thursdayStartTime']!),
+                                                ),
+                                              ),
+                                              Divider(thickness: 1,height: 1),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'fridayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['fridayStartTime']!),
+                                                ),
+                                              ),
+                                              Divider(thickness: 1,height: 1),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'saturdayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['saturdayStartTime']!),
+                                                ),
+                                              ),
+                                              Divider(thickness: 1,height: 1),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  showTimeDialog(dayTime: 'sundayStartTime');
+                                                },
+                                                child: Container(
+                                                  color: Colors.green,
+                                                  width: 100.0,
+                                                  height: 30,
+                                                  alignment: Alignment.center,
+                                                  child: Text(time_table['sundayStartTime']!),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'tuesdayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['tuesdayEndTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'wednesdayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['wednesdayEndTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'thursdayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['thursdayEndTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'fridayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['fridayEndTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'saturdayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['saturdayEndTime']!),
-                                          ),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () {
-                                            showTimeDialog(dayTime: 'sundayEndTime');
-                                          },
-                                          child: Container(
-                                            color: Colors.blue,
-                                            width: 150.0,
-                                            height: 40,
-                                            alignment: Alignment.center,
-                                            child: Text(time_table['sundayEndTime']!),
-                                          ),
-                                        ),
+                                        Column(
+                                          children: [
+                                            headerContainer(day: 'Finish', width: 100.0),
+
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'mondayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['mondayEndTime']!),
+                                              ),
+                                            ),
+                                            Divider(thickness: 1,height: 1),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'tuesdayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['tuesdayEndTime']!),
+                                              ),
+                                            ),
+                                            Divider(thickness: 1,height: 1),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'wednesdayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['wednesdayEndTime']!),
+                                              ),
+                                            ),
+                                            Divider(thickness: 1,height: 1),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'thursdayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['thursdayEndTime']!),
+                                              ),
+                                            ),
+                                            Divider(thickness: 1,height: 1),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'fridayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['fridayEndTime']!),
+                                              ),
+                                            ),
+                                            Divider(thickness: 1,height: 1),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'saturdayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['saturdayEndTime']!),
+                                              ),
+                                            ),
+                                            Divider(thickness: 1,height: 1),
+                                            GestureDetector(
+                                              onTap: () {
+                                                showTimeDialog(dayTime: 'sundayEndTime');
+                                              },
+                                              child: Container(
+                                                color: Colors.blue,
+                                                width: 100.0,
+                                                height: 30,
+                                                alignment: Alignment.center,
+                                                child: Text(time_table['sundayEndTime']!),
+                                              ),
+                                            ),
+                                          ],
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
-                              )
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
+                          const SizedBox(height: 20,),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 40,
+                            child: MaterialButton(
+                              color: Colors.black,
+                              onPressed: () {
+                                Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
+                                builder: (context) => ParentHomePage()), (route) => false,);
+                              },
+                              child: const Text(
+                                'Finish',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 60,),
+
                         ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                      SizedBox(
-                        width: double.infinity,
-                        height: 40,
-                        child: MaterialButton(
-                          color: Colors.black,
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => HomePage()));
-                          },
-                          child: const Text(
-                            'Finish',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-
-                    ],
-                  )),
-            ],
+                      )),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -380,10 +361,20 @@ class _FromDataRegistrationParentState extends State<FromDataRegistrationParent>
 
   void showTimeDialog({required String dayTime}) async {
 
+    int oldTimeHour;
+    int oldTimeMinute;
+
+    if(time_table[dayTime] != 'Select'){
+      oldTimeHour = int.parse(time_table[dayTime]?.substring(0, 2)??'0');
+      oldTimeMinute = int.parse(time_table[dayTime]?.substring(3, 5)??'0');
+    }else{
+      oldTimeHour = 6;
+      oldTimeMinute = 0;
+    }
 
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: TimeOfDay(hour: oldTimeHour, minute: oldTimeMinute),
         builder: (context, childWidget) {
           return MediaQuery(
               data: MediaQuery.of(context).copyWith(

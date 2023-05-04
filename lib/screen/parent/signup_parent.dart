@@ -2,6 +2,7 @@ import 'package:bloom/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+import '../../app/preferences/app_preferences.dart';
 import '../../utils/nospaceformatter.dart';
 import 'form_data_registration.dart';
 
@@ -13,12 +14,12 @@ class SignupParentScreen extends StatefulWidget {
 }
 
 class _SignupParentScreenState extends State<SignupParentScreen> {
-  bool hasEnglishSpeaking = true;
+  bool isEnglishSpeaking = true;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar.appBar(title: 'New Account - (Parent)',context: context),
+      appBar: CustomAppBar.appBar(title: 'Parent'),
       body: Form(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -36,29 +37,10 @@ class _SignupParentScreenState extends State<SignupParentScreen> {
                     },
                     keyboardType: TextInputType.text,
                     textInputAction: TextInputAction.next,
-                    inputFormatters: [NoSpaceFormatter()],
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'First Name',
-                      hintText: ' Enter your first name',
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    style: TextStyle(color: Colors.black),
-                    textCapitalization: TextCapitalization.words,
-                    onTapOutside: (event) {
-
-                    },
-                    keyboardType: TextInputType.text,
-                    textInputAction: TextInputAction.next,
-                    inputFormatters: [NoSpaceFormatter()],
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Last Name',
-                      hintText: ' Enter your last name',
+                      labelText: 'Full Name',
+                      hintText: ' Enter your Full name',
                     ),
                   ),
                   const SizedBox(
@@ -67,15 +49,14 @@ class _SignupParentScreenState extends State<SignupParentScreen> {
                   TextField(
                     style: TextStyle(color: Colors.black),
                     onTapOutside: (event) {
-
                     },
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     inputFormatters: [NoSpaceFormatter()],
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Email Id',
-                      hintText: ' Enter a Email Id',
+                      labelText: 'Email address',
+                      hintText: ' Enter a Email address',
                     ),
                   ),
                   const SizedBox(
@@ -126,10 +107,10 @@ class _SignupParentScreenState extends State<SignupParentScreen> {
                           activeColor: Colors.green,
                           checkColor: Colors.black,
                           shape: CircleBorder(),
-                          value: hasEnglishSpeaking,
+                          value: isEnglishSpeaking,
                           onChanged: (bool? value) {
                             setState(() {
-                              hasEnglishSpeaking = !hasEnglishSpeaking;
+                              isEnglishSpeaking = !isEnglishSpeaking;
                             });
                           },
                         ),
@@ -142,7 +123,6 @@ class _SignupParentScreenState extends State<SignupParentScreen> {
                           ))
                     ],
                   ),
-
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -153,10 +133,10 @@ class _SignupParentScreenState extends State<SignupParentScreen> {
                           activeColor: Colors.green,
                           checkColor: Colors.black,
                           shape: CircleBorder(),
-                          value: !hasEnglishSpeaking,
+                          value: !isEnglishSpeaking,
                           onChanged: (bool? value) {
                             setState(() {
-                              hasEnglishSpeaking = !hasEnglishSpeaking;
+                              isEnglishSpeaking = !isEnglishSpeaking;
                             });
                           },
                         ),
@@ -175,8 +155,16 @@ class _SignupParentScreenState extends State<SignupParentScreen> {
                     child: MaterialButton(
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (
-                            context) => FromDataRegistrationParent()));
+
+                        AppPreferences.saveCredentials(
+                            accountType: AccountType.PARENT,
+                            photoUrl: 'https://s3.amazonaws.com/assets.mockflow.com/app/wireframepro/company/C6cb20310489449e9a1687a74d3b5ac7b/projects/MYFw8X66Gh/images/D217a3e93f9338ed58fd2020d98693fc8',
+                            email: 'vipin@pearlorganisation.com',
+                            token: 'abc',
+                            name: 'Shreya Mathur',
+                            englishSpeaking: true);
+
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => FromDataRegistrationParent()));
                       },
                       child: const Text(
                         "Create Account",
